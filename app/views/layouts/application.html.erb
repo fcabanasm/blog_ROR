@@ -8,27 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <header>
-        <nav class="be-red white large-padding">
-          <ul class="no-list row center-xs middle-xs">
-            <li class="col-md">
-              <h1 class="no-margin" id="logo"> Bloop App</h1>
-            </li>
-            <li class="col-md">
-              <%= link_to "Inicio",root_path %>
-            </li>
-            <li class="col-md">
-              Diseño
-            </li>
-            <li class="col-md">
-              Programación
-            </li>
-            <li class="col-md">
-              Tecnología
-            </li>
-          </ul>
-        </nav>
-</header>
+<%= render "partials/navigation" %>
+<div style="<%="display:none"if notice.nil? and alert.nil?%>">
+  <%= notice %> <%= alert %>
+</div>
+
     <%= yield %>
 </body>
 </html>

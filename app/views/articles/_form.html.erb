@@ -1,0 +1,46 @@
+<div style="width: 80%;margin: 0 auto;">
+  <h1><%=name%></h1>
+  <%= form_for(@article,html: { id: "articles_form" }) do |form| %>
+      <% @article.errors.full_messages.each do |message| %>
+          <div class="col-md be-red white top-space" style="width: 50%">
+            <%=message%>
+          </div>
+      <%end%>
+      <div class="field">
+        <%= form.text_field :title,placeholder:"Titulo", class:"form-control"%>
+      </div>
+      <div class="field">
+        Portada: <%=form.file_field :cover%>
+      </div>
+      <div class="field">
+        <%= form.hidden_field :body,id:"body-textarea"%>
+        <%= form.hidden_field :markup_body,id:"markup-body-textarea"%>
+      </div>
+      <div id="epiceditor" style="height: 250px"></div>
+      <div class="field">
+        <label>Categorías: </label>
+        <% @categories.each do |category|%>
+            <div class="field">
+              <%= check_box_tag "categories[]",category.id%> <%=category.name%>
+            </div>
+        <%end%>
+      </div>
+      <div class="field">
+        <%= form.submit "Guardar", class:"btn be-red white large-padding" %>
+      </div>
+  <%end%>
+
+  <script type="text/javascript" charset="utf-8">
+      var editor = new EpicEditor({
+          textarea:"markup-body-textarea",
+          file:{
+              name:"nuevo_articulo"
+          }
+      });
+      editor.load();
+      $("#articles_form").on("submit",function(){
+          $("#body-textarea").val( editor.exportFile("nuevo_articulo","html"))
+          $("#markup-body-textarea").val( editor.exportFile("nuevo_articulo"))
+      });
+  </script>
+</div>
