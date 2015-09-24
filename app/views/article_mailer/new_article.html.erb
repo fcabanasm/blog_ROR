@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h1><%=@article.title%></h1>
+    <p><%=truncate(@article.body,lengh:30)%></p>
+    <p><a href="http"></a></p>
+    <p><%=link_to "Leer más",article_url(@article)%></p>
+</body>
+</head>
+</html>
